@@ -32,7 +32,7 @@ void loop(){
 SPI notes:
 Each byte register is 8 bits wide
 EX. vspi->transfer(0x01,0b01010101) sends the binary data to the register. Hex bytes are binary shorthand
-and the register applies the binary in reverse order where the index is 0b[7,6,5,4,3,2,1,0]
+and the register applies the binary in reverse order where the index is 0b[7,6,5,4,3,2,1,0] in MSB_MODE for SPI
 The datasheet describes all of the parameters you can enter.
 
 Note: If a sample rate is set that can not be supported by the selected pulse width and number of exposures per sample, then
