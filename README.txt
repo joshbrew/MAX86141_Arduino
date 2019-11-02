@@ -1,7 +1,12 @@
+WORK IN PROGRESS
 MAX86141 LIBRARY FOR ARDUINO
 REQUIRES A MAX86141 DEVICE
 
+The example is set up for 2 MAX86141's running on an ESP32, so just adjust it for what you
+need.
 
+
+--------------------------------------
 pseudocode:
 MAX86141 pulseOx;
 uint8_t[128] output;
