@@ -2,8 +2,10 @@ WORK IN PROGRESS
 MAX86141 LIBRARY FOR ARDUINO
 REQUIRES A MAX86141 DEVICE
 
-The example is set up for 2 MAX86141's running on an ESP32, so just adjust it for what you
-need.
+Install: Drag the example folder and libraries folder to your Arduino sketch repository and merge with any existing
+libraries folder.
+
+The example is set up for 2 MAX86141's running on an ESP32 on separate lanes, adjust it for what you need.
 
 
 --------------------------------------
