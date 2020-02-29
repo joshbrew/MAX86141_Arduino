@@ -10,6 +10,8 @@ The example is set up for 2 MAX86141's running on an ESP32 on separate lanes (th
 
 --------------------------------------
 pseudocode:
+
+```
 MAX86141 pulseOx;
 uint8_t[128] output;
 
@@ -155,6 +157,7 @@ WRITE LEDC2[3:0] to 0x2; // LED2 exposure configured in time slot 1
 WRITE LEDC3[3:0] to 0x0;
 WRITE LEDC4[3:0] to 0x0;
 WRITE LEDC5[3:0] to 0x0;
-WRITE LEDC6[3:0] to 0x0;
+WRITE LEDC6[3:0] to 0x0
 WRITE SHDN[0] to 0x0; // Start Sampling STOP;
 */
+```
