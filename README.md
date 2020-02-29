@@ -9,6 +9,8 @@ libraries folder.
 
 The example is set up for 2 MAX86141's running on an ESP32 on separate lanes (the DAC based power pins defined in sketch don't work concurrently with SPI so you need to give it a separate 1.8V power source and ensure there is voltage translation on the SPI pins between 1.8V on the MAX86141 and the 3.3V on the ESP32 (or whatever board), adjust it for what you need.
 
+![Block](https://github.com/moothyknight/MAX86141_Arduino/blob/master/libraries/MAX86141/Block_Diag.PNG?raw=true)
+
 
 --------------------------------------
 pseudocode:
