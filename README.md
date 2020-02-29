@@ -1,5 +1,7 @@
 WORK IN PROGRESS
+
 MAX86141 LIBRARY FOR ARDUINO
+
 REQUIRES A MAX86141 DEVICE (you gotta make it yourself as there are no breakouts available yet)
 
 Install: Drag the example folder and libraries folder to your Arduino sketch repository and merge with any existing
