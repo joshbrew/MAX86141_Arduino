@@ -246,25 +246,27 @@ class MAX86141 {
     //THESE NEED TO BE SET UP MANUALLY
     SPIClass * spi = NULL;
     int SS;
-
+    int spiClk = 8000000; //8MHz clock on MAX86141 Max, only 200KHz necessary.
+    
     int led1A[32];
     int led1B[32];
     int led2A[32];
     int led2B[32];
-
-    static const int spiClk = 8000000; //8MHz clock on MAX86141
+    
     uint8_t       m_tx_buf[3];                       /**< TX buffer. */
     uint8_t       m_rx_buf[3];                       /**< RX buffer. */
     const uint8_t m_length = sizeof(m_tx_buf);       /**< Transfer length. */
 
-    void init();
-    void write_reg(uint8_t address, uint8_t data_in);
-    void read_reg(uint8_t address, uint8_t *data_out);
+    //Functions
+    void init(int setSpiClk, bool debug=false);
+    void write_reg(uint8_t address, uint8_t data_in, bool debug=false);
+    void read_reg(uint8_t address, uint8_t *data_out, bool debug=false);
     void fifo_intr();
     void read_fifo(uint8_t data_buffer[], uint8_t count);
     void device_data_read(void);
     void setSS(int pin);
     void setSPI(SPIClass * newspi);
+    void setSpiClk(int newSpiClk);
 };
 
 #endif 
