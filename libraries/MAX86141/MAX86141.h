@@ -247,6 +247,7 @@ class MAX86141 {
     SPIClass * spi = NULL;
     int SS;
     int spiClk = 8000000; //8MHz clock on MAX86141 Max, only 200KHz necessary.
+    bool debug = false;
     
     int led1A[32];
     int led1B[32];
@@ -258,15 +259,16 @@ class MAX86141 {
     const uint8_t m_length = sizeof(m_tx_buf);       /**< Transfer length. */
 
     //Functions
-    void init(int setSpiClk, bool debug=false);
-    void write_reg(uint8_t address, uint8_t data_in, bool debug=false);
-    void read_reg(uint8_t address, uint8_t *data_out, bool debug=false);
+    void init(int setSpiClk);
+    void write_reg(uint8_t address, uint8_t data_in);
+    void read_reg(uint8_t address, uint8_t *data_out);
     void fifo_intr();
     void read_fifo(uint8_t data_buffer[], uint8_t count);
     void device_data_read(void);
     void setSS(int pin);
     void setSPI(SPIClass * newspi);
     void setSpiClk(int newSpiClk);
+    void setDebug(bool setdebug);
 };
 
 #endif 

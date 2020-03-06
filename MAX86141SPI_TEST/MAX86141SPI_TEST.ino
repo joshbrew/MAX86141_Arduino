@@ -1,7 +1,7 @@
 
 #include "MAX86141.h"
 
-int spiClk = 200000; // 8 MHz Maximum
+static int spiClk = 200000; // 8 MHz Maximum
 
 //uninitalised pointers to SPI objects
 MAX86141 pulseOx1;
@@ -28,7 +28,8 @@ void setup() {
   //vspi->begin(0, 2, 4, 33); //SCLK, MISO, MOSI, SS
   delay(100);
   Serial.println("Init Pulse Ox 1...");
-  pulseOx1.init(spiClk, true);
+  pulseOx1.setDebug(true);
+  pulseOx1.init(spiClk);
 
 }
 
@@ -37,8 +38,8 @@ void loop() {
 
   //Serial.println(uint8_t(0b00000001));
   uint8_t output1;
-  Serial.println("pulseOx1 Output: ");
-  pulseOx1.read_reg(REG_PART_ID, &output1, true);
+  //Serial.println("pulseOx1 Output: ");
+  //pulseOx1.read_reg(REG_PART_ID, &output1);
   //Serial.println(output1);
   /*
   uint8_t count;
@@ -58,5 +59,5 @@ void loop() {
     Serial.println(pulseOx1.led2B[0]);    
   }
   */
-  delay(1000);
+  delay(3000);
 }
