@@ -14,8 +14,10 @@ void MAX86141::write_reg(uint8_t address, uint8_t data_in)
 
     if(debug == true) {
         Serial.println("TX Buffer contents");
-        Serial.println(m_tx_buf[0]);
-        Serial.println(m_tx_buf[1]);
+        Serial.print(m_tx_buf[0]);
+        Serial.print("|");
+        Serial.print(m_tx_buf[1]);
+        Serial.print("|")
         Serial.println(m_tx_buf[2]);
     }
 /**< A buffer for incoming data. */    
@@ -37,8 +39,10 @@ void MAX86141::write_reg(uint8_t address, uint8_t data_in)
 
     if(debug == true) {
         Serial.println("RX Buffer contents");
-        Serial.println(m_rx_buf[0]);
-        Serial.println(m_rx_buf[1]);
+        Serial.print(m_rx_buf[0]);
+        Serial.print("|");
+        Serial.print(m_rx_buf[1]);
+        Serial.print("|");
         Serial.println(m_rx_buf[2]);
     }
     /*
@@ -80,8 +84,10 @@ void MAX86141::read_reg(uint8_t address, uint8_t *data_out)
 
     if(debug == true){
         Serial.println("RX Buffer contents");
-        Serial.println(m_rx_buf[0]);
-        Serial.println(m_rx_buf[1]);
+        Serial.print(m_rx_buf[0]);
+        Serial.print("|");
+        Serial.print(m_rx_buf[1]);
+        Serial.print("|");
         Serial.println(m_rx_buf[2]);
     }
 /*
