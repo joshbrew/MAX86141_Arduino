@@ -135,8 +135,8 @@ void MAX86141::init(int newSpiClk=1000000)
 	write_reg(REG_FIFO_CONFIG_2,0x04);
 	//write_reg(REG_LED_SEQ_1, 0b00100001);
 	//write_reg(REG_LED_SEQ_2, 0b00001001);
-	write_reg(REG_LED_SEQ_1, 0x21);
-	write_reg(REG_LED_SEQ_2, 0x05);
+	write_reg(REG_LED_SEQ_1, 0b00100001);
+	write_reg(REG_LED_SEQ_2, 0b1001);
     write_reg(REG_LED_SEQ_3, 0x00);
 
 
@@ -186,10 +186,10 @@ void MAX86141::device_data_read(void)
     for (i=0; i<sample_count; i++)
     {
         led1A[i] = ((dataBuf[i*off+0] << 16 ) | (dataBuf[i*off+1] << 8) | (dataBuf[i*off+2])) & 0x7FFFF; // LED1, PD1
-        led2A[i] = ((dataBuf[i*off+3] << 16 ) | (dataBuf[i*off+4] << 8) | (dataBuf[i*off+5])) & 0x7FFFF; // LED1, PD2
-        ambA[i] = ((dataBuf[i*off+6] << 16 ) | (dataBuf[i*off+7] << 8) | (dataBuf[i*off+8])) & 0x7FFFF; // LED2, PD1
-        led1B[i] = ((dataBuf[i*off+9] << 16 ) | (dataBuf[i*off+10] << 8) | (dataBuf[i*off+11])) & 0x7FFFF; // LED2, PD2
-        led2B[i] = ((dataBuf[i*off+12] << 16 ) | (dataBuf[i*off+13] << 8) | (dataBuf[i*off+14])) & 0x7FFFF; // LED2, PD2
+        led1B[i] = ((dataBuf[i*off+3] << 16 ) | (dataBuf[i*off+4] << 8) | (dataBuf[i*off+5])) & 0x7FFFF; // LED1, PD2
+        led2A[i] = ((dataBuf[i*off+6] << 16 ) | (dataBuf[i*off+7] << 8) | (dataBuf[i*off+8])) & 0x7FFFF; // LED2, PD1
+        led2B[i] = ((dataBuf[i*off+9] << 16 ) | (dataBuf[i*off+10] << 8) | (dataBuf[i*off+11])) & 0x7FFFF; // LED2, PD2
+        ambA[i] = ((dataBuf[i*off+12] << 16 ) | (dataBuf[i*off+13] << 8) | (dataBuf[i*off+14])) & 0x7FFFF; // LED2, PD2
         ambB[i] = ((dataBuf[i*off+15] << 16 ) | (dataBuf[i*off+16] << 8) | (dataBuf[i*off+17])) & 0x7FFFF; // LED2, PD2
     } 
     

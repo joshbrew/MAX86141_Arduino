@@ -1,5 +1,7 @@
 #include "MAX86141.h"
 
+#include <esp_timer.h>
+
 static int spiClk = 1000000; // 8 MHz Maximum
 
 //
@@ -69,19 +71,33 @@ void loop() {
   //Serial.println(output1);
 
   pulseOx1.device_data_read();
+  unsigned long currentMicros = esp_timer_get_time();
 
+  int led1A = pulseOx1.led1A[0] - pulseOx1.ambA[0];
+  int led2A = pulseOx1.led2A[0] - pulseOx1.ambA[0];
+  int led1B = pulseOx1.led1B[0] - pulseOx1.ambB[0];
+  int led2B = pulseOx1.led2B[0] - pulseOx1.ambB[0];
+  
+  Serial.println(currentMicros);
   Serial.print("P1: LED1: ");
-  Serial.print(pulseOx1.led1A[0]);
-  Serial.print("| LED2: ");
-  Serial.print(pulseOx1.led2A[0]);
-  Serial.print("| AMB: ");
+  Serial.print(led1A);
+  Serial.print(" | LED2: ");
+  Serial.print(led2A);
+  Serial.print(" | AMB: ");
   Serial.println(pulseOx1.ambA[0]);
   Serial.print("P2: LED1: ");
-  Serial.print(pulseOx1.led1B[0]);
-  Serial.print("| LED2: ");
-  Serial.print(pulseOx1.led2B[0]);
-  Serial.print("| AMB: ");
+  Serial.print(led1B);
+  Serial.print(" | LED2: ");
+  Serial.print(led2B);
+  Serial.print(" | AMB: ");
   Serial.println(pulseOx1.ambB[0]);
+
+  Serial.print("P2 - P1: LED1: ");
+  Serial.print(led1B - led1A);
+  Serial.print(" | LED2: ");
+  Serial.print(led2B - led2A);
+  Serial.print(" | AMB: ");
+  Serial.println(pulseOx1.ambB[0] - pulseOx1.ambA[0]);
     
   delay(100);
 }
