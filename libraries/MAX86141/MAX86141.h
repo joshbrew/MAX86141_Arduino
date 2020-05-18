@@ -47,10 +47,14 @@
 #include <SPI.h>
 
 //MAX86141 Registry addresses
-#define REG_INTR_STATUS_1      (0x00)      //Interrupt Status 1
-#define REG_INTR_STATUS_2      (0x01)      //Interrupt Status 2
-#define REG_INTR_ENABLE_1      (0x02)      //Interrupt Enable 1
-#define REG_INTR_ENABLE_2      (0x03)      //Interrupt Enable 2
+
+#define WRITE_EN 0x00
+#define READ_EN 0xFF
+
+#define REG_INT_STAT_1         (0x00)      //Interrupt Status 1
+#define REG_INT_STAT_2         (0x01)      //Interrupt Status 2
+#define REG_INT_EN_1           (0x02)      //Interrupt Enable 1
+#define REG_INT_EN_2           (0x03)      //Interrupt Enable 2
 #define REG_FIFO_WR_PTR        (0x04)      //FIFO Buffer Write Pointer
 #define REG_FIFO_RD_PTR        (0x05)      //FIFO Buffer Read Pointer
 #define REG_OVF_COUNTER        (0x06)      //Over Flow Counter
@@ -67,7 +71,7 @@
 #define REG_PPG_CONFIG_3       (0x13)      //PPG Configuration Settings Group 3
 
 #define REG_PROX_INTR_THRESH   (0x14)      //Prox Interrupt Threshold
-#define REG_PDIODE_BIAS        (0x15)      //Photo Diode Bias
+#define REG_PD_BIAS            (0x15)      //Photo Diode Bias
 #define REG_PICKET_FENCE       (0x16)      //Picket Fence Settings
 
 #define REG_LED_SEQ_1          (0x20)      //LED Sequence 1
@@ -126,7 +130,7 @@ the highest available sample rate will be automatically set. The user can read b
 ADC Output is 18 bits. Number of exposures controlled in LED sequence registers (1 to 6)
 
 PPG_SR (sampling rate).
-Register    SPS     Pulses per Sample
+Hex         SPS     Pulses per Sample
 0x0A        8       1
 0x0B        16      1
 0x0C        32      1
@@ -150,32 +154,32 @@ Register    SPS     Pulses per Sample
 0x09        100     2
 
 Sample Average SMP_AVE
-Bits    Sample Average
-000     1
-001     2
-010     4    
-011     8
-100     16
-101     32
-110     64
-111     128
+Hex     Sample Average
+0x0     1
+0x1     2
+0x2     4    
+0x3     8
+0x4     16
+0x5     32
+0x6     64
+0x7     128
 
 ADC Full Scale Input Current ADC_RGE
-Reg     Amps
+Hex     Amps
 0x0     4.0uA
 0x1     8.0uA
 0x2     16.0uA
 0x3     32.0uA
 
 Integration time PPG_TINT
-Reg     Time
+Hex     Time
 0x0     14.8uS
 0x1     29.4uS
 0x2     58.7uS
 0x3     117.3uS
 
 LED Amplitude Range LEDx_RGE (LEDx_PA = 0xFF) - not sure how to set this.
-Reg     Amps
+Hex     Amps
 0x0     31mA
 0x1     62mA
 0x2     93mA
@@ -189,7 +193,7 @@ bits    Time
 11      12uS
 
 Photo Diode Bias REG_PDIODE_BIAS
-Register    Photo Diode Capacitance
+Hex         Photo Diode Capacitance
 0x001       0pF to 65pF
 0x101       65pF to 130pF
 0x110       130pF to 260pF
@@ -246,13 +250,15 @@ class MAX86141 {
     //THESE NEED TO BE SET UP MANUALLY
     SPIClass * spi = NULL;
     int SS;
-    int spiClk = 8000000; //8MHz clock on MAX86141 Max, only 200KHz necessary.
+    int spiClk = 1000000; //8MHz clock on MAX86141 Max, only 200KHz necessary.
     bool debug = false;
     
     int led1A[32];
     int led1B[32];
     int led2A[32];
     int led2B[32];
+    int ambA[32];
+    int ambB[32];
     
     uint8_t       m_tx_buf[3];                       /**< TX buffer. */
     uint8_t       m_rx_buf[3];                       /**< RX buffer. */
@@ -261,7 +267,7 @@ class MAX86141 {
     //Functions
     void init(int setSpiClk);
     void write_reg(uint8_t address, uint8_t data_in);
-    void read_reg(uint8_t address, uint8_t *data_out);
+    uint8_t read_reg(uint8_t address);
     void fifo_intr();
     void read_fifo(uint8_t data_buffer[], uint8_t count);
     void device_data_read(void);
@@ -269,6 +275,7 @@ class MAX86141 {
     void setSPI(SPIClass * newspi);
     void setSpiClk(int newSpiClk);
     void setDebug(bool setdebug);
+    void clearInt();
 };
 
 #endif 
