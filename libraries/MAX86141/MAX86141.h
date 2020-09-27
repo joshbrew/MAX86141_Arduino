@@ -1,7 +1,7 @@
-#ifndef MAX86141_H_
-#define MAX86141_H_
+#ifndef MAX86141_H
+#define MAX86141_H
 //Modified by Joshua Brewster for Arduino compatibility. Developed on the ESP32, should be compatible with most Arduino boards.
-//I expanded some of the features, improved documentation. More to come.
+//I expanded some of the features, improved documentation. More to come. Thank you Michael Lyons for the help getting it to work.
 
 //Found the old code here with the below copyright for the MAX86141 code: https://github.com/jonasgitt/Patient24---Remote-Patient-Monitoring
 
@@ -178,6 +178,23 @@ Hex     Time
 0x2     58.7uS
 0x3     117.3uS
 
+LED settings (4 bit address options for REG_LED_SEQ 1, 2, and 3)
+Data outputted in order of setting, then anything set to 0x00 won't be outputted to free up the FIFO for more data.
+Bin     Setting
+0000    NONE 
+0001    LED1
+0010    LED2
+0011    LED3
+0100    LED1 & LED2
+0101    LED1 & LED3
+0110    LED2 & LED3
+0111    LED1, LED2, LED3
+1000    Pilot on LED1
+1001    DIRECT AMBIENT (i.e. normal photodiode measurements)
+1010    LED4 (external mux)
+1011    LED5 (external mux)
+1100    LED6 (external mux)
+
 LED Amplitude Range LEDx_RGE (LEDx_PA = 0xFF) - not sure how to set this.
 Hex     Amps
 0x0     31mA
@@ -253,12 +270,13 @@ class MAX86141 {
     int spiClk = 1000000; //8MHz clock on MAX86141 Max, only 200KHz necessary.
     bool debug = false;
     
-    int led1A[32];
-    int led1B[32];
-    int led2A[32];
-    int led2B[32];
-    int ambA[32];
-    int ambB[32];
+    int led1A[128];
+    int led1B[128];
+    int led2A[128];
+    int led2B[128];
+    int led3A[128];
+    int led3B[128];
+    //led4A thru led6B
     
     uint8_t       m_tx_buf[3];                       /**< TX buffer. */
     uint8_t       m_rx_buf[3];                       /**< RX buffer. */
