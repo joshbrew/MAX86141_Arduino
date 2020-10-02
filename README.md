@@ -1,4 +1,6 @@
-WORK IN PROGRESS
+WORK IN PROGRESS, WORKING EXAMPLES
+
+Change the MAX86141::init function in MAX86141.cpp or change after calling pulseOx.setup() in the .ino.
 
 MAX86141 LIBRARY FOR ARDUINO
 
