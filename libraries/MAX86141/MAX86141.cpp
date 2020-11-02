@@ -105,10 +105,10 @@ void MAX86141::init(int newSpiClk=1000000)
 
 	//
 	// PPG1 & 2 & 3
-	// 
+	//
 	write_reg(REG_PPG_SYNC_CTRL, 0b000000000);
-	write_reg(REG_PPG_CONFIG_1, 0b00000001); //ALC_DIS,ADD_OFF,PPG2_RGE,PPG1_RGE,PPG_TINT
-	write_reg(REG_PPG_CONFIG_2, 0b10011101); //SPS, SMP_AVE
+	write_reg(REG_PPG_CONFIG_1, 0b00000010); //ALC_DIS,ADD_OFF,PPG2_RGE,PPG1_RGE,PPG_TINT
+	write_reg(REG_PPG_CONFIG_2, 0b10011100); //SPS (0-5), SMP_AVE (6-8)
 	write_reg(REG_PPG_CONFIG_3, 0b11000110); //LED_SETLNG, DIG_FILT_SEL, BURST_EN
 
 	//
@@ -136,9 +136,9 @@ void MAX86141::init(int newSpiClk=1000000)
 	write_reg(REG_FIFO_CONFIG_2, 0b00001101);
 	//write_reg(REG_LED_SEQ_1, 0x21);
 	//write_reg(REG_LED_SEQ_2, 0x05);
-	write_reg(REG_LED_SEQ_1, 0b00100011); //0001 - LED 1, 0010 - LED2, 0011 - LED3, 1001 - AMBIENT
-	write_reg(REG_LED_SEQ_2, 0b00001001);
-    write_reg(REG_LED_SEQ_3, 0x00);
+	write_reg(REG_LED_SEQ_1, 0b00100011); //DATA BUF 2 | DATA BUF 1  // 0001 - LED 1, 0010 - LED2, 0011 - LED3, 1001 - AMBIENT
+	write_reg(REG_LED_SEQ_2, 0b00001001); //DATA BUF 4 | DATA BUF 3  //
+    write_reg(REG_LED_SEQ_3, 0x00); // 5 | 6
 
 
 	//
