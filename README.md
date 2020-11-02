@@ -1,4 +1,6 @@
-WORK IN PROGRESS
+WORK IN PROGRESS, WORKING EXAMPLES
+
+Change the MAX86141::init function in MAX86141.cpp or change after calling pulseOx.setup() in the .ino.
 
 MAX86141 LIBRARY FOR ARDUINO
 
@@ -9,7 +11,7 @@ libraries folder.
 
 The example is set up for a MAX86141 running on an ESP32 on VSPI. 
 
-You need to give it a separate 1.8V power source or level translator and ensure there is voltage translation on the SPI pins between 1.8V on the MAX86141 and the 3.3V on the ESP32 (or whatever board), adjust it for what you need.
+If designing from scratch you need to give it a separate 1.8V power source or level translator and ensure there is voltage translation on the SPI pins between 1.8V on the MAX86141 and the 3.3V on the ESP32 (or whatever board), adjust it for what you need.
 
 ![Block](https://github.com/moothyknight/MAX86141_Arduino/blob/master/libraries/MAX86141/Block_Diag.PNG?raw=true)
 
