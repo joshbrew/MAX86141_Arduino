@@ -1,8 +1,8 @@
 #include "MAX86141.h"
 
-#include <esp_timer.h>
+//#include <esp_timer.h>
 
-static int spiClk = 1000000; // 8 MHz Maximum
+static int spiClk = 2000000; // 8 MHz Maximum
 
 unsigned long currentMicros;
 unsigned long LEDMicros;
@@ -76,7 +76,7 @@ void setup() {
 
   //Serial.println(pulseOx1.read_reg(0x0D));
 
-  currentMicros = esp_timer_get_time();
+  currentMicros = micros();//esp_timer_get_time();
   LEDMicros = currentMicros;
 
 }
@@ -115,7 +115,7 @@ void switch_LED(){
 // the loop function runs over and over again until power down or reset
 void loop() {
   
-  currentMicros = esp_timer_get_time();
+  currentMicros = micros();//esp_timer_get_time();
 /*
   Serial.print("LED1");
   Serial.print(led1A);
