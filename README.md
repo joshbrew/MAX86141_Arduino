@@ -13,7 +13,7 @@ The example is set up for a MAX86141 running on an ESP32 on VSPI.
 
 If designing from scratch you need to give it a separate 1.8V power source or level translator and ensure there is voltage translation on the SPI pins between 1.8V on the MAX86141 and the 3.3V on the ESP32 (or whatever board), adjust it for what you need.
 
-![Block](https://github.com/moothyknight/MAX86141_Arduino/blob/master/libraries/MAX86141/Block_Diag.PNG?raw=true)
+![Block](https://github.com/joshbrew/MAX86141_Arduino/blob/master/docs/Block_Diag.PNG?raw=true)
 
 
 --------------------------------------
